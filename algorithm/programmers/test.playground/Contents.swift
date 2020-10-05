@@ -5,6 +5,53 @@
 //n은 1이상 8000000000 이하인 자연수입니다.
 import UIKit
 
+func Fibonacci(Nth: Double) -> Double {
+    if Nth == 1 || Nth == 2 {
+        return 1
+    }
+    
+    return Fibonacci(Nth: Nth - 1) + Fibonacci(Nth: Nth - 2)
+}
+
+func FibonacciNumberUsingWhile(Nth:Double) {
+    var F1:Double = 1  // F1 초항 및 Fn = F(n-1) + F(n-2) 에서 작은 값 F(n-2)를 담당.
+    var F2:Double = 1  // F1 초항 및 Fn = F(n-1) + F(n-2) 에서 큰 값 F(n-1)를 담당.
+    var FN:Double = 1  // Fn을 담은 변수 선언
+    var i:Double = 1   // while문을 돌리기 위해 시작 변수 선언
+    
+    while i <= Nth {
+        if i == 1 || i == 2 { // F1, F2 까지는 i를 1씩 더해 반복문 조건만 채우고 나옴. (if문을 while 앞으로 빼고 var i = 3으로 시작해도 됨.
+            print(F1)       // F1, F2일 때는 바로 F1의 값 1을 출력.
+        } else {
+            FN = F2 + F1    // F3부터 F(n-1) + F(n-2)를 수행.
+            print(FN)   // 다음번 계산할 작은 값 F(n-2)에 현재의 큰 값 F(n-1)항 값을 넣는다.
+            F1 = F2 // 다음번 계산할 큰 값 F(n-1)에 현재의 작은 값 F(n-2)항 값을 넣는다.
+            F2 = FN // N번째 항까지 수행하기 위한 조건.
+        }
+        i += 1
+    }
+}
+
+func FibonacciNumberUsingWhile(Nth:Double) -> (Double) {
+    var F1:Double = 1  // F1 초항 및 Fn = F(n-1) + F(n-2) 에서 작은 값 F(n-2)를 담당.
+    var F2:Double = 1  // F1 초항 및 Fn = F(n-1) + F(n-2) 에서 큰 값 F(n-1)를 담당.
+    var FN:Double = 1  // Fn을 담은 변수 선언
+    var i:Double = 1   // while문을 돌리기 위해 시작 변수 선언
+
+    while i <= Nth {
+        if i == 1 || i == 2 {
+            i += 1
+            continue    // F1, F2 까지는 i를 1씩 더해 반복문 조건만 채우고 나옴. (if문을 while 앞으로 빼고 var i = 3으로 시작해도 됨.
+        } else {
+            FN = F2 + F1 // F3부터 F(n-1) + F(n-2)를 수행.
+            F1 = F2        // 다음번 계산할 작은 값 F(n-2)에 현재의 큰 값 F(n-1)항 값을 넣는다.
+            F2 = FN        // 다음번 계산할 큰 값 F(n-1)에 현재의 작은 값 F(n-2)항 값을 넣는다.
+            i += 1        // N번째 항까지 수행하기 위한 조건.
+        }
+    }
+    return FN
+}
+
 //func solution(_ n:Int64) -> Int64 {
 //    if n < 1 || n > 8000000000 {
 //        return 0
